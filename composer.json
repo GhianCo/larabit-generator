@@ -1,0 +1,32 @@
+{
+  "name": "ghianco/larabit",
+  "description": "Larabit Code Generator.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "GhianCo Zapata",
+      "email": "ghiancorx@gmail.com",
+      "homepage": "https://github.com/GhianCo"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/",
+      "Tests\\": "tests/"
+    }
+  },
+  "type": "package",
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.3.0",
+    "ext-pdo": "*",
+    "ext-json": "*",
+    "pimple/pimple": "^3.2",
+    "slim/psr7": "^1.4.0",
+    "slim/slim": "^4.5",
+    "vlucas/phpdotenv": "^5.1"
+  },
+  "require-dev": {
+    "symfony/console": "^3.3"
+  }
+}
