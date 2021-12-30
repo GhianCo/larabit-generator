@@ -1,5 +1,6 @@
 {
   "name": "ghianco/larabit",
+  "type": "project",
   "description": "Larabit Code Generator.",
   "license": "MIT",
   "authors": [
@@ -30,6 +31,6 @@
       "App\\": "src/"
     }
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true
 }
