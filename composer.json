@@ -16,8 +16,7 @@
     "pimple/pimple": "^3.2",
     "slim/psr7": "^1.4.0",
     "slim/slim": "^4.5",
-    "vlucas/phpdotenv": "^5.1",
-    "ghianco/larabit": "dev-master@dev"
+    "vlucas/phpdotenv": "^5.1"
   },
   "require-dev": {
     "symfony/console": "^3.3"
@@ -31,12 +30,6 @@
       "App\\": "src/"
     }
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/GhianCo/larabit"
-    }
-  ]
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
