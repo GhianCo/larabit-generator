@@ -16,7 +16,8 @@
     "pimple/pimple": "^3.2",
     "slim/psr7": "^1.4.0",
     "slim/slim": "^4.5",
-    "vlucas/phpdotenv": "^5.1"
+    "vlucas/phpdotenv": "^5.1",
+    "ghianco/larabit": "dev-master@dev"
   },
   "require-dev": {
     "symfony/console": "^3.3"
