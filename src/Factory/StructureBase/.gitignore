@@ -12,7 +12,6 @@
 /composer.lock
 /docs/json/**/*
 /vendor/
-/export/
 /.m2/repository
 /tests/api/target/
 .vscode
