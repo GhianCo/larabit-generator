@@ -1,1 +1,1 @@
-# Larabit - Structure generator
+# Larabit - Code generator

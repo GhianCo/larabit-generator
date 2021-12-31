@@ -7,8 +7,8 @@ class LarabitGeneratorService
     private $dbConn;
     private $database;
 
-    private $targetExportConfig = __DIR__ . '/../../export/config/';
-    private $targetExportSrc = __DIR__ . '/../../export/src/';
+    private $targetExportConfig = __DIR__ . '/../../../../../config/';
+    private $targetExportSrc = __DIR__ . '/../../../../../src/';
 
     private $sourceFactory = __DIR__ . '/../../src/Factory/';
 
