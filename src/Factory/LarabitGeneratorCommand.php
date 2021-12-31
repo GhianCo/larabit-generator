@@ -21,21 +21,16 @@ class LarabitGeneratorCommand extends Command
     {
         $this->setName('generate:resources:database')
             ->setDescription('Al ingresar el nombre de alguna base de datos se generan los recursos.')
-            ->setHelp('Este comando crea la recursos necesarios para exponer la informacion de cada base de datos. V- ' . self::COMMAND_VERSION)
-            ->addArgument(
-                'database',
-                InputOption::VALUE_REQUIRED,
-                'Cual es la base de datos de conexión?.'
-            );
+            ->setHelp('Este comando crea la recursos necesarios para exponer la informacion de cada base de datos. V- ' . self::COMMAND_VERSION);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $database = $this->container->get('settings')['db'];
         $dbConn = $this->container->get('db');
-        $database = $input->getArgument('database');
-        $generator = new LarabitGeneratorService($dbConn, $database);
+        $generator = new LarabitGeneratorService($dbConn, $database['name']);
         $generator->generateStructure();
-        $output->writeln('Success - Se generaron los recursos de la base de datos: ' . $database);
+        $output->writeln('Success - Se generaron los recursos de la base de datos: ' . $database['name']);
         return 0;
     }
 }
