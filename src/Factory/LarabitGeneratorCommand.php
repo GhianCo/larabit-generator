@@ -57,6 +57,7 @@ class LarabitGeneratorCommand extends Command
         $generator = new LarabitGeneratorService($dbConn, $database);
         $generator->generateStructure();
         $output->writeln('Success - Se generaron los recursos de la base de datos: ' . $database);
+        return 0;
     }
 
     protected function validateOptionsAndArgs(InputInterface $input)

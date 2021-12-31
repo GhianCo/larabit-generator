@@ -23,9 +23,7 @@ class LarabitGeneratorService
     public function generateStructure()
     {
         $this->validateHasDatabase();
-        $this->getTablesWithData($this->database);
 
-        $this->copyDirectoriesAndCore();
         $this->updateFilesRequiredToConfig();
 
         $this->generateControllerFilesByTable();
@@ -39,52 +37,35 @@ class LarabitGeneratorService
 
     function validateHasDatabase()
     {
-        $dbs = $this->dbConn->query('SHOW DATABASES');
-        while ($dbs->fetchColumn(0) != $this->database) {
-            break;
-        }
-    }
-
-    function getTablesWithData($database)
-    {
-        // the query to perform to get all the tables
-        $this->dbConn->query('USE ' . $database);
-        $query = "SHOW TABLES";
-        $dbs = $this->doQuery($query, 'Tables_in_' . $database);
+        $tables_in_db = $this->dbConn::select('SHOW TABLES');
+        $db = "Tables_in_".$this->database;
         $tableList = array();
-        // get the table listings collected and generated in the query
-        foreach ($dbs as $key => $db) {
-            // DESCRIBE query, gets all the field in a table
-            $tableInfoQuery = "DESCRIBE " . $key;
-            // perform the query having Field as key
-            $dbQuery = $this->doQuery($tableInfoQuery, 'Field');
-
+        foreach($tables_in_db as $table){
+            $dataTable = $this->dbConn::select('describe ' . $table->{$db});
             // the field list array
             $fieldList = array();
 
             // array pointer
             $i = 0;
             // loop through the generated field list
-            foreach ($dbQuery as $fKey => $fVal) {
+            foreach ($dataTable as $fVal) {
                 $data = new \stdClass();
-                $data->key = $fKey;
+                $data->key = $fVal->Field;
                 $data->data = $fVal;
                 // put it into the array
                 $fieldList[$i] = $data;
                 $i++;
             }
             // after completing the loop, put the results into the table list array
-            $tableList[$key] = $fieldList;
+            $tableList[$table->{$db}] = $fieldList;
         }
-
-        // put the final value into the class variable $tableListings
         $this->allTables = $tableList;
     }
 
     function doQuery($sqlStatment, $indexField = 'auto')
     {
         // perform the query and put it into a temporary variable
-        $dbQuery = $this->dbConn->query($sqlStatment);
+        $dbQuery = $this->dbConn::select($sqlStatment);
         // create an array of queried objects
         $dataSet = array();
 
@@ -114,24 +95,6 @@ class LarabitGeneratorService
         return $dataSet;
     }
 
-    function copyDirectoriesAndCore()
-    {
-        $source = __DIR__ . '/StructureBase';
-        $target = __DIR__ . '/../../export';
-        $this->rcopy($source, $target);
-
-        $this->modifyEnv($target . '/.env', [
-            'DB_HOST' => "'" . $_SERVER['DB_HOST'] . "'",
-            'DB_NAME' => "'" . $_SERVER['DB_NAME'] . "'",
-            'DB_USER' => "'" . $_SERVER['DB_USER'] . "'",
-            'DB_PASS' => "'" . $_SERVER['DB_PASS'] . "'",
-            'DB_PORT' => "'" . $_SERVER['DB_PORT'] . "'",
-
-            'APP_DOMAIN' => "'http://localhost/" . $_SERVER['DB_NAME'] . "'",
-            'SECRET_KEY' => "'" . $_SERVER['DB_NAME'] . "'"
-        ]);
-
-    }
 
     function updateFilesRequiredToConfig()
     {
@@ -519,7 +482,7 @@ class LarabitGeneratorService
             foreach ($table as $indexField => $field) {
                 $field = $table[$indexField]->key;
                 $data = $table[$indexField]->data;
-                if ($data['Null'] == 'NO' && $data['Key'] != 'PRI') {
+                if ($data->Null == 'NO' && $data->Key != 'PRI') {
                     $__srcService .= "        if (!isset(\$" . $indexTable . "->" . $field . ")) {" . PHP_EOL;
                     $__srcService .= "            \$hasException = true;" . PHP_EOL;
                     $__srcService .= "            \$fieldsException[] = '" . $field . "';" . PHP_EOL;
@@ -536,7 +499,7 @@ class LarabitGeneratorService
             foreach ($table as $indexField => $field) {
                 $field = $table[$indexField]->key;
                 $data = $table[$indexField]->data;
-                if ($data['Key'] != 'PRI') {
+                if ($data->Key != 'PRI') {
                     $__srcService .= "        if (isset(\$" . $indexTable . "->" . $field . ")) {" . PHP_EOL;
                     $__srcService .= "            \$" . $indexTable . "ToCreate->set" . ucwords($field) . "(\$" . $indexTable . "->" . $field . ");" . PHP_EOL;
                     $__srcService .= "        }" . PHP_EOL;
@@ -642,7 +605,7 @@ class LarabitGeneratorService
             foreach ($table as $indexField => $field) {
                 $field = $table[$indexField]->key;
                 $data = $table[$indexField]->data;
-                if ($data['Null'] == 'NO' && $data['Key'] != 'PRI') {
+                if ($data->Null == 'NO' && $data->Key != 'PRI') {
                     $__srcService .= "        if (!isset(\$data->" . $field . ")) {" . PHP_EOL;
                     $__srcService .= "            \$hasException = true;" . PHP_EOL;
                     $__srcService .= "            \$fieldsException[] = '" . $field . "';" . PHP_EOL;
@@ -657,7 +620,7 @@ class LarabitGeneratorService
             foreach ($table as $indexField => $field) {
                 $field = $table[$indexField]->key;
                 $data = $table[$indexField]->data;
-                if ($data['Key'] != 'PRI') {
+                if ($data->Key != 'PRI') {
                     $__srcService .= "        if (isset(\$data->" . $field . ")) {" . PHP_EOL;
                     $__srcService .= "            \$" . $indexTable . "ToUpdate->set" . ucwords($field) . "(\$data->" . $field . ");" . PHP_EOL;
                     $__srcService .= "        }" . PHP_EOL;
@@ -724,17 +687,5 @@ class LarabitGeneratorService
         }
         file_put_contents($target, $content3);
     }
-
-    function modifyEnv($path, $values = [])
-    {
-        $env = [];
-        foreach (parse_ini_file($path) as $k => $value) {
-            if (in_array($k, array_keys($values))) {
-                $env[$k] = "$k={$values[$k]}";
-            }
-        }
-        return file_put_contents($path, implode(PHP_EOL, $env));
-    }
-
 
 }
