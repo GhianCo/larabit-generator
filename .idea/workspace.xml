@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f5ce236-b8fc-4ad9-b758-b3b39b60d349" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseException.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseException.php" afterDir="false" />
-    </list>
+    <list default="true" id="1f5ce236-b8fc-4ad9-b758-b3b39b60d349" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,8 +68,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseException.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+            <state relative-caret-position="105">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -79,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+            <state relative-caret-position="507">
+              <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
               <folding>
                 <element signature="e#31#77#0#PHP" expanded="true" />
               </folding>
@@ -159,9 +157,9 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/composer.json" />
-        <option value="$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php" />
         <option value="$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php" />
         <option value="$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseException.php" />
+        <option value="$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php" />
       </list>
     </option>
   </component>
@@ -170,7 +168,7 @@
       <server host="localhost" id="3afea038-3a07-4e05-b6a3-996f27d34746" name="Server" />
     </servers>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="775" />
     <option name="y" value="25" />
     <option name="width" value="905" />
@@ -274,18 +272,18 @@
       <workItem from="1640877758970" duration="2508000" />
       <workItem from="1640880614777" duration="4019000" />
       <workItem from="1640884712727" duration="16006000" />
-      <workItem from="1640919921706" duration="3191000" />
+      <workItem from="1640919921706" duration="3952000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36421000" />
+    <option name="totallyTimeSpent" value="37182000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="775" y="25" width="905" height="928" extended-state="0" />
+    <frame x="775" y="25" width="905" height="928" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3105446" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3105446" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -298,7 +296,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.25774473" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.25774473" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -501,16 +499,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
-          <folding>
-            <element signature="e#31#77#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -518,10 +506,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+          <folding>
+            <element signature="e#31#77#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseException.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
