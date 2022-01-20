@@ -134,7 +134,7 @@ class LarabitGeneratorService
         $__configRoutes .= "\$app->group('/api', function () use (\$app) {" . PHP_EOL;
 
         foreach ($this->allTables as $index => $table) {
-            $__configRoutes .= "    require __DIR__ . '/../src/Route/api/" . $index . "_route.php'; " . PHP_EOL;
+            $__configRoutes .= "    require __DIR__ . '/../src/Route/" . $index . "_route.php'; " . PHP_EOL;
         }
 
         $__configRoutes .= "});" . PHP_EOL;
@@ -320,9 +320,8 @@ class LarabitGeneratorService
     {
         $source = $this->sourceFactory . 'TemplateBase/ObjectbaseRoute.php';
         foreach ($this->allTables as $index => $table) {
-            $target = $this->targetExportSrc . 'Route/api/' . $index . '_route.php';
+            $target = $this->targetExportSrc . 'Route/' . $index . '_route.php';
             @mkdir($this->targetExportSrc . 'Route');
-            @mkdir($this->targetExportSrc . 'Route/api');
             copy($source, $target);
             $this->replaceFileContent($target, $index);
         }
