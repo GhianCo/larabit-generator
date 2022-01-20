@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Objectbase;
+use App\Exception\Objectbase as ObjectbaseException;
 
 final class ObjectbaseRepository extends BaseRepository
 {
@@ -14,7 +15,7 @@ final class ObjectbaseRepository extends BaseRepository
         if ($objectbase) {
             return $objectbase;
         }
-        throw new \App\Exception\Objectbase('No se encontró el identificador ' . $objectbaseId . '.', 404);
+        throw new ObjectbaseException('No se encontró el identificador ' . $objectbaseId . '.', 404);
 
     }
 

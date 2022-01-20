@@ -382,6 +382,7 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "use App\Repository\\" . ucfirst($indexTable) . "Repository;" . PHP_EOL;
             $__srcService .= "use App\Service\BaseService;" . PHP_EOL;
+            $__srcService .= "use App\Exception\\" . ucfirst($indexTable) . " as " . ucfirst($indexTable) . "Exception;" . PHP_EOL;
             $__srcService .= "use Respect\Validation\Validator as validator;" . PHP_EOL;
             $__srcService .= PHP_EOL;
             $__srcService .= "abstract class Base extends BaseService" . PHP_EOL;
@@ -397,7 +398,7 @@ class LarabitGeneratorService
                 $__srcService .= "    protected static function validar" . ucfirst($indexTable) . "Nombre(\$name)" . PHP_EOL;
                 $__srcService .= "    {" . PHP_EOL;
                 $__srcService .= "        if (!validator::length(1, 50)->validate(\$name)) {" . PHP_EOL;
-                $__srcService .= "            throw new \App\Exception\\" . ucfirst($indexTable) . "('El nombre es inválido.', 400);" . PHP_EOL;
+                $__srcService .= "            throw new " . ucfirst($indexTable) . "Exception('El nombre es inválido.', 400);" . PHP_EOL;
                 $__srcService .= "        }" . PHP_EOL;
                 $__srcService .= PHP_EOL;
                 $__srcService .= "        return \$name;" . PHP_EOL;
@@ -408,7 +409,7 @@ class LarabitGeneratorService
                 $__srcService .= "    protected static function validar" . ucfirst($indexTable) . "Descripcion(\$description)" . PHP_EOL;
                 $__srcService .= "    {" . PHP_EOL;
                 $__srcService .= "        if (!validator::length(1, 50)->validate(\$description)) {" . PHP_EOL;
-                $__srcService .= "            throw new \App\Exception\\" . ucfirst($indexTable) . "('La descripcion es inválida.', 400);" . PHP_EOL;
+                $__srcService .= "            throw new " . ucfirst($indexTable) . "Exception('La descripcion es inválida.', 400);" . PHP_EOL;
                 $__srcService .= "        }" . PHP_EOL;
                 $__srcService .= PHP_EOL;
                 $__srcService .= "        return \$description;" . PHP_EOL;
@@ -420,7 +421,7 @@ class LarabitGeneratorService
                 $__srcService .= "{" . PHP_EOL;
                 $__srcService .= "    \$email = filter_var(\$emailValue, FILTER_SANITIZE_EMAIL);" . PHP_EOL;
                 $__srcService .= "    if (!validator::email()->validate(\$email)) {" . PHP_EOL;
-                $__srcService .= "        throw new \App\Exception\\" . ucfirst($indexTable) . "('Correo invalido', 400);" . PHP_EOL;
+                $__srcService .= "        throw new " . ucfirst($indexTable) . "Exception('Correo invalido', 400);" . PHP_EOL;
                 $__srcService .= "     }" . PHP_EOL;
                 $__srcService .= PHP_EOL;
                 $__srcService .= "     return (string)\$email;" . PHP_EOL;
@@ -431,7 +432,7 @@ class LarabitGeneratorService
                 $__srcService .= "protected static function validate" . ucfirst($indexTable) . "Estado(\$status)" . PHP_EOL;
                 $__srcService .= "{" . PHP_EOL;
                 $__srcService .= "    if (!validator::numeric()->between(0, 1)->validate(\$status)) {" . PHP_EOL;
-                $__srcService .= "       throw new \App\Exception\\" . ucfirst($indexTable) . "('Estado invalido', 400);" . PHP_EOL;
+                $__srcService .= "       throw new " . ucfirst($indexTable) . "Exception('Estado invalido', 400);" . PHP_EOL;
                 $__srcService .= "    }" . PHP_EOL;
                 $__srcService .= PHP_EOL;
                 $__srcService .= "    return \$status;" . PHP_EOL;
