@@ -1,48 +1,36 @@
 <?php
 
 namespace App\Repository;
+
 use App\Entity\Objectbase;
 
 final class ObjectbaseRepository extends BaseRepository
 {
-    public function checkAndGetObjectbase($objectbaseId)
+    public function checkAndGetObjectbaseOrFail($objectbaseId)
     {
-        $query = 'SELECT * FROM `objectbase` WHERE `objectbase_id` = ?';
-        $objectbase = $this->getDb()::selectOne($query, [$objectbaseId]);
-        if (!$objectbase) {
-            throw new \App\Exception\Objectbase('No se encontró el identificador ' . $objectbaseId . '.', 404);
+        $objectbaseSql = Objectbase::select();
+        $objectbaseSql->where('objectbase_id', $objectbaseId);
+        $objectbase = $objectbaseSql->first();
+        if ($objectbase) {
+            return $objectbase;
         }
-        return new Objectbase(get_object_vars($objectbase));
+        throw new \App\Exception\Objectbase('No se encontró el identificador ' . $objectbaseId . '.', 404);
+
     }
 
     public function getAll()
     {
-        $query = 'SELECT * FROM `objectbase` ORDER BY `objectbase_id`';
-        $allObjectbases = $this->getDb()::select($query);
-        return (array)$allObjectbases;
-    }
+        return Objectbase::all()->toArray();
 
-    public function getQueryObjectbasesByPage()
-    {
-        return "
-            SELECT *
-            FROM `objectbase`
-            ORDER BY `objectbase_id`
-        ";
     }
 
     public function getObjectbasesByPage($page, $perPage)
     {
-        $params = array();
-        $query = $this->getQueryObjectbasesByPage();
-        $this->database::select($query, $params);
-        $total = $this->database::selectOne('SELECT FOUND_ROWS() AS totalCount')->totalCount;
         return $this->getResultsWithPagination(
-            $query,
+            new Objectbase(),
+            array(),
             $page,
-            $perPage,
-            $params,
-            $total
+            $perPage
         );
     }
 }

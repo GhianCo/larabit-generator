@@ -105,7 +105,6 @@ class LarabitGeneratorService
 
         $__configRepositories = PHP_EOL;
         $__configRepositories .= PHP_EOL;
-        $__configRepositories .= 'use Psr\Container\ContainerInterface;' . PHP_EOL;
         foreach ($this->allTables as $index => $table) {
             $__configRepositories .= "use App\Repository\\" . ucfirst($index) . "Repository;" . PHP_EOL;
         }
@@ -113,8 +112,8 @@ class LarabitGeneratorService
         $__configRepositories .= PHP_EOL;
 
         foreach ($this->allTables as $index => $table) {
-            $__configRepositories .= "\$container['" . $index . "_repository'] = static function (ContainerInterface \$container) {" . PHP_EOL;
-            $__configRepositories .= "    return new " . ucfirst($index) . "Repository(\$container->get('db'));" . PHP_EOL;
+            $__configRepositories .= "\$container['" . $index . "_repository'] = static function () {" . PHP_EOL;
+            $__configRepositories .= "    return new " . ucfirst($index) . "Repository();" . PHP_EOL;
             $__configRepositories .= "};" . PHP_EOL;
         }
 
@@ -446,7 +445,7 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "    protected function get" . ucfirst($indexTable) . "FromDb(\$" . $indexTable . "Id)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
-            $__srcService .= "        return \$this->" . $indexTable . "Repository->checkAndGet" . ucfirst($indexTable) . "(\$" . $indexTable . "Id);" . PHP_EOL;
+            $__srcService .= "        return \$this->" . $indexTable . "Repository->checkAndGet" . ucfirst($indexTable) . "OrFail(\$" . $indexTable . "Id);" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= "}" . PHP_EOL;
 
