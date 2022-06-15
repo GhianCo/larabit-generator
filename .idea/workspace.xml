@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5ce236-b8fc-4ad9-b758-b3b39b60d349" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
-              <caret line="467" column="43" lean-forward="true" selection-start-line="467" selection-start-column="43" selection-end-line="467" selection-end-column="43" />
+            <state relative-caret-position="248">
+              <caret line="538" column="15" lean-forward="true" selection-start-line="538" selection-start-column="15" selection-end-line="538" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -112,9 +111,10 @@
       <server host="localhost" id="3afea038-3a07-4e05-b6a3-996f27d34746" name="Server" />
     </servers>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="828" />
     <option name="y" value="25" />
-    <option name="width" value="827" />
+    <option name="width" value="852" />
     <option name="height" value="927" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -221,16 +221,15 @@
       <workItem from="1640919921706" duration="5601000" />
       <workItem from="1642688558980" duration="1984000" />
       <workItem from="1654922928505" duration="37000" />
-      <workItem from="1655264909239" duration="409000" />
+      <workItem from="1655264909239" duration="1073000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41264000" />
+    <option name="totallyTimeSpent" value="41928000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="827" height="927" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="25" width="1680" height="927" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.21245421" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -245,7 +244,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.25558314" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.39578164" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -391,8 +390,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="467" column="43" lean-forward="true" selection-start-line="467" selection-start-column="43" selection-end-line="467" selection-end-column="43" />
+        <state relative-caret-position="248">
+          <caret line="538" column="15" lean-forward="true" selection-start-line="538" selection-start-column="15" selection-end-line="538" selection-end-column="15" />
         </state>
       </provider>
     </entry>

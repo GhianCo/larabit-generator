@@ -506,7 +506,7 @@ class LarabitGeneratorService
             }
             $__srcService .= PHP_EOL;
             */
-            $__srcService .= "        return \$" . $indexTable . "ToCreate->setRawAttributes((array) \$" . $indexTable . ")" . PHP_EOL;
+            $__srcService .= "        return \$" . $indexTable . "ToCreate->setRawAttributes((array) \$" . $indexTable . ");" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= "}" . PHP_EOL;
 
