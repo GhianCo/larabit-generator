@@ -495,7 +495,7 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "        \$" . $indexTable . "ToCreate = new " . ucwords($indexTable) . "();" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            foreach ($table as $indexField => $field) {
+            /*foreach ($table as $indexField => $field) {
                 $field = $table[$indexField]->key;
                 $data = $table[$indexField]->data;
                 if ($data->Key != 'PRI') {
@@ -505,7 +505,8 @@ class LarabitGeneratorService
                 }
             }
             $__srcService .= PHP_EOL;
-            $__srcService .= "        return \$" . $indexTable . "ToCreate;" . PHP_EOL;
+            */
+            $__srcService .= "        return \$" . $indexTable . "ToCreate->setRawAttributes((array) \$" . $indexTable . ")" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= "}" . PHP_EOL;
 
@@ -616,7 +617,7 @@ class LarabitGeneratorService
             $__srcService .= "            throw new " . ucwords($indexTable) . "Exception('El/los campos ' . implode(',', \$fieldsException) . ' son requerido(s).', 400);" . PHP_EOL;
             $__srcService .= "        }" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            foreach ($table as $indexField => $field) {
+            /*foreach ($table as $indexField => $field) {
                 $field = $table[$indexField]->key;
                 $data = $table[$indexField]->data;
                 if ($data->Key != 'PRI') {
@@ -626,7 +627,8 @@ class LarabitGeneratorService
                 }
             }
             $__srcService .= PHP_EOL;
-            $__srcService .= "        return \$" . $indexTable . "ToUpdate;" . PHP_EOL;
+            */
+            $__srcService .= "        return \$" . $indexTable . "ToUpdate->setRawAttributes((array) \$data);" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= "}" . PHP_EOL;
 

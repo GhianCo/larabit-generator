@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1f5ce236-b8fc-4ad9-b758-b3b39b60d349" name="Default Changelist" comment="" />
+    <list default="true" id="1f5ce236-b8fc-4ad9-b758-b3b39b60d349" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,15 +18,24 @@
     </execution>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
+              <folding>
+                <element signature="e#31#77#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="60">
-                <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-              </first_editor>
-              <second_editor />
+        <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4">
+              <caret line="467" column="43" lean-forward="true" selection-start-line="467" selection-start-column="43" selection-end-line="467" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -48,6 +60,7 @@
       <find>targetExportSrc</find>
       <find>sourceFactory</find>
       <find>'db'</find>
+      <find>Service</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot; . PHP_EOL</replace>
@@ -85,11 +98,11 @@
         <option value="$PROJECT_DIR$/export/.env" />
         <option value="$PROJECT_DIR$/src/Factory/StructureBase/.env" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseException.php" />
         <option value="$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php" />
         <option value="$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseRepository.php" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php" />
       </list>
     </option>
@@ -100,9 +113,8 @@
     </servers>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="831" />
     <option name="y" value="25" />
-    <option name="width" value="849" />
+    <option name="width" value="827" />
     <option name="height" value="927" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -117,6 +129,32 @@
             <path>
               <item name="larabit-generator" type="b2602c69:ProjectViewProjectNode" />
               <item name="larabit-generator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="larabit-generator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="larabit-generator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="larabit-generator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="larabit-generator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Factory" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="larabit-generator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="larabit-generator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Factory" type="462c0819:PsiDirectoryNode" />
+              <item name="TemplateBase" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="larabit-generator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="larabit-generator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Factory" type="462c0819:PsiDirectoryNode" />
+              <item name="TemplateBase" type="462c0819:PsiDirectoryNode" />
+              <item name="ObjectBaseController" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -182,16 +220,19 @@
       <workItem from="1640884712727" duration="16006000" />
       <workItem from="1640919921706" duration="5601000" />
       <workItem from="1642688558980" duration="1984000" />
+      <workItem from="1654922928505" duration="37000" />
+      <workItem from="1655264909239" duration="409000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40818000" />
+    <option name="totallyTimeSpent" value="41264000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1680" height="927" extended-state="6" />
+    <frame x="0" y="25" width="827" height="927" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.3172243" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.21245421" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -204,7 +245,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2568238" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.25558314" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -274,16 +315,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="60">
-            <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseRoute.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -331,9 +362,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="135">
+            <caret line="9" column="62" selection-start-line="9" selection-start-column="62" selection-end-line="9" selection-end-column="62" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorCommand.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
+        <state relative-caret-position="495">
           <caret line="36" selection-start-line="36" selection-end-line="36" />
           <folding>
             <element signature="e#31#77#0#PHP" expanded="true" />
@@ -343,15 +391,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Factory/LarabitGeneratorService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="124" column="21" lean-forward="true" selection-start-line="124" selection-start-column="21" selection-end-line="124" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Factory/TemplateBase/ObjectbaseRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        <state relative-caret-position="4">
+          <caret line="467" column="43" lean-forward="true" selection-start-line="467" selection-start-column="43" selection-end-line="467" selection-end-column="43" />
         </state>
       </provider>
     </entry>
