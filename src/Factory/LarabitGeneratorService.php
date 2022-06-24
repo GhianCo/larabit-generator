@@ -288,7 +288,7 @@ class LarabitGeneratorService
 
             @mkdir($this->targetExportSrc . 'Entity');
 
-            $this->_writeFile($__srcEntity, $this->targetExportSrc . "Entity/" . ucfirst($indexTable) . ".php");
+            $this->_writeFile($__srcEntity, $this->targetExportSrc . "Entity/" . ucfirst($indexTable) . ".php", true);
         }
     }
 
@@ -662,9 +662,11 @@ class LarabitGeneratorService
         }
     }
 
-    function _writeFile($fClass, $fName)
+    function _writeFile($fClass, $fName, $override = false)
     {
-
+        if (file_exists($fName) && $override == false) {
+            return false;
+        }
         if (!$handle = fopen($fName, 'w')) {
 
             exit;
