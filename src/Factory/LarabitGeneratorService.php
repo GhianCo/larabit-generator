@@ -220,7 +220,7 @@ class LarabitGeneratorService
         $this->_writeFile($__configRepositories, $this->targetExportConfig . "repositories.php");
         $this->_writeFile($__configRoutes, $this->targetExportConfig . "routes.php");
         $this->_writeFile($__configServices, $this->targetExportConfig . "services.php");
-        $this->_writeFile($__srcControllerDefault, $this->targetExportSrc . "Controller/DefaultController.php");
+        $this->_writeFile($__srcControllerDefault, $this->targetExportSrc . "Controller/DefaultController.php", true);
     }
 
     function generateControllerFilesByTable()
@@ -229,9 +229,13 @@ class LarabitGeneratorService
 
         foreach ($this->allTables as $index => $table) {
             $target = $this->targetExportSrc . 'Controller/' . ucfirst($index);
+
+            if (file_exists($target)) {
+                continue;
+            }
+
             $this->rcopy($source, $target);
 
-            // Replace CRUD Controller Template for New Entity.
             $this->replaceFileContent($target . '/Base.php', $index);
             $this->replaceFileContent($target . '/Create.php', $index);
             $this->replaceFileContent($target . '/Delete.php', $index);
@@ -288,7 +292,7 @@ class LarabitGeneratorService
 
             @mkdir($this->targetExportSrc . 'Entity');
 
-            $this->_writeFile($__srcEntity, $this->targetExportSrc . "Entity/" . ucfirst($indexTable) . ".php");
+            $this->_writeFile($__srcEntity, $this->targetExportSrc . "Entity/" . ucfirst($indexTable) . ".php", true);
         }
     }
 
@@ -297,6 +301,9 @@ class LarabitGeneratorService
         $source = $this->sourceFactory . 'TemplateBase/ObjectbaseException.php';
         foreach ($this->allTables as $index => $table) {
             $target = $this->targetExportSrc . 'Exception/' . ucfirst($index) . '.php';
+            if (file_exists($target)) {
+                continue;
+            }
             @mkdir($this->targetExportSrc . 'Exception');
             copy($source, $target);
             $this->replaceFileContent($target, $index);
@@ -309,6 +316,9 @@ class LarabitGeneratorService
         $source = $this->sourceFactory . 'TemplateBase/ObjectbaseRepository.php';
         foreach ($this->allTables as $index => $table) {
             $target = $this->targetExportSrc . 'Repository/' . ucfirst($index) . 'Repository.php';
+            if (file_exists($target)) {
+                continue;
+            }
             @mkdir($this->targetExportSrc . 'Repository');
             copy($source, $target);
             $this->replaceFileContent($target, $index);
@@ -321,6 +331,9 @@ class LarabitGeneratorService
         $source = $this->sourceFactory . 'TemplateBase/ObjectbaseRoute.php';
         foreach ($this->allTables as $index => $table) {
             $target = $this->targetExportSrc . 'Route/' . $index . '_route.php';
+            if (file_exists($target)) {
+                continue;
+            }
             @mkdir($this->targetExportSrc . 'Route');
             copy($source, $target);
             $this->replaceFileContent($target, $index);
@@ -333,6 +346,9 @@ class LarabitGeneratorService
         $source = $this->sourceFactory . 'TemplateBase/ObjectbaseService.php';
         foreach ($this->allTables as $index => $table) {
             $target = $this->targetExportSrc . 'Service/' . $index . '_service.php';
+            if (file_exists($target)) {
+                continue;
+            }
             @mkdir($this->targetExportSrc . 'Service');
             copy($source, $target);
             $this->replaceFileContent($target, $index);
@@ -662,9 +678,11 @@ class LarabitGeneratorService
         }
     }
 
-    function _writeFile($fClass, $fName)
+    function _writeFile($fClass, $fName, $overrite = false)
     {
-
+        if (file_exists($fName) && $overrite == false) {
+            return false;
+        }
         if (!$handle = fopen($fName, 'w')) {
 
             exit;
