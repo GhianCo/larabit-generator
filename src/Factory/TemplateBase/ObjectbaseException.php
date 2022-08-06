@@ -2,6 +2,6 @@
 
 namespace App\Exception;
 
-final class Objectbase extends Base
+final class ObjectbaseException extends Base
 {
 }

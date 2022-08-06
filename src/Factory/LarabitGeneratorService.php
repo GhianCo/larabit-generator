@@ -250,16 +250,11 @@ class LarabitGeneratorService
             $__srcEntity .= PHP_EOL;
             $__srcEntity .= "namespace App\Entity;" . PHP_EOL;
             $__srcEntity .= PHP_EOL;
-            $__srcEntity .= "use \Illuminate\Database\Eloquent\Model;" . PHP_EOL;
             $__srcEntity .= PHP_EOL;
             $__srcEntity .= "final class " . ucfirst($indexTable) . " extends Model" . PHP_EOL;
             $__srcEntity .= "{" . PHP_EOL;
-
             $__srcEntity .= "    protected \$table = '" . $indexTable . "';" . PHP_EOL;
-            $__srcEntity .= PHP_EOL;
             $__srcEntity .= "    protected \$primaryKey = '" . $indexTable . "_id';" . PHP_EOL;
-            $__srcEntity .= PHP_EOL;
-            $__srcEntity .= "    public \$timestamps = false;" . PHP_EOL;
             $__srcEntity .= PHP_EOL;
             $__srcEntity .= "    protected \$fillable = [" . PHP_EOL;
             foreach ($table as $indexField => $field) {
@@ -438,11 +433,6 @@ class LarabitGeneratorService
                 $__srcService .= "}" . PHP_EOL;
                 $__srcService .= PHP_EOL;
             }
-            $__srcService .= "    protected function get" . ucfirst($indexTable) . "FromCache(\$" . $indexTable . "Id)" . PHP_EOL;
-            $__srcService .= "    {" . PHP_EOL;
-            $__srcService .= "        return \$this->get" . ucfirst($indexTable) . "FromDb(\$" . $indexTable . "Id)->toJson();" . PHP_EOL;
-            $__srcService .= "    }" . PHP_EOL;
-            $__srcService .= PHP_EOL;
             $__srcService .= "    protected function get" . ucfirst($indexTable) . "FromDb(\$" . $indexTable . "Id)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
             $__srcService .= "        return \$this->" . $indexTable . "Repository->checkAndGet" . ucfirst($indexTable) . "OrFail(\$" . $indexTable . "Id);" . PHP_EOL;
@@ -457,15 +447,29 @@ class LarabitGeneratorService
              * Create file
              */
 
+            $fieldsToValidate = array();
+
+            foreach ($table as $indexField => $field) {
+                $field = $table[$indexField]->key;
+                $data = $table[$indexField]->data;
+                if ($data->Null == 'NO' && $data->Key != 'PRI') {
+                    $fieldsToValidate[] .= $field;
+                }
+            }
+
             $__srcService = PHP_EOL;
             $__srcService .= PHP_EOL;
             $__srcService .= "namespace App\Service\\" . ucwords($indexTable) . ";" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            $__srcService .= "use App\Exception\\" . ucwords($indexTable) . " as " . ucwords($indexTable) . "Exception;" . PHP_EOL;
+            $__srcService .= "use App\Exception\\" . ucwords($indexTable) . "Exception;" . PHP_EOL;
+            $__srcService .= "use App\Utils\FieldValidator;" . PHP_EOL;
             $__srcService .= "use App\Entity\\" . ucwords($indexTable) . ";" . PHP_EOL;
             $__srcService .= PHP_EOL;
             $__srcService .= "final class Create extends Base" . PHP_EOL;
             $__srcService .= "{" . PHP_EOL;
+            $__srcService .= "    use FieldValidator;" . PHP_EOL;
+            $__srcService .= PHP_EOL;
+            $__srcService .= "    private \$fieldsRequired = array('" . implode("', '", $fieldsToValidate) . "'');" . PHP_EOL;
             $__srcService .= "    public function create(\$input)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
             $__srcService .= "        \$data = \$this->validate" . ucwords($indexTable) . "Data(\$input);" . PHP_EOL;
@@ -474,39 +478,13 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "    private function validate" . ucwords($indexTable) . "Data(\$input)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
-            $__srcService .= "        \$" . $indexTable . " = json_decode((string)json_encode(\$input), false);" . PHP_EOL;
-            $__srcService .= "        \$hasException = false;" . PHP_EOL;
-            $__srcService .= "        \$fieldsException = array();" . PHP_EOL;
+            $__srcService .= "        \$fieldsException = \$this->validator(\$input);" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            foreach ($table as $indexField => $field) {
-                $field = $table[$indexField]->key;
-                $data = $table[$indexField]->data;
-                if ($data->Null == 'NO' && $data->Key != 'PRI') {
-                    $__srcService .= "        if (!isset(\$" . $indexTable . "->" . $field . ")) {" . PHP_EOL;
-                    $__srcService .= "            \$hasException = true;" . PHP_EOL;
-                    $__srcService .= "            \$fieldsException[] = '" . $field . "';" . PHP_EOL;
-                    $__srcService .= "        }" . PHP_EOL;
-                }
-            }
-            $__srcService .= PHP_EOL;
-            $__srcService .= "        if (\$hasException == true) {" . PHP_EOL;
-            $__srcService .= "            throw new " . ucwords($indexTable) . "Exception('El/los campos ' . implode(',', \$fieldsException) . ' son requerido(s).', 400);" . PHP_EOL;
+            $__srcService .= "        if (count(\$fieldsException)) {" . PHP_EOL;
+            $__srcService .= "          throw new " . ucwords($indexTable) . "Exception('El/los campos ' . GenericUtils::arrayValuesToString(\$fieldsException, \", \") . ' son requerido(s).', 400);" . PHP_EOL;
             $__srcService .= "        }" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            $__srcService .= "        \$" . $indexTable . "ToCreate = new " . ucwords($indexTable) . "();" . PHP_EOL;
-            $__srcService .= PHP_EOL;
-            /*foreach ($table as $indexField => $field) {
-                $field = $table[$indexField]->key;
-                $data = $table[$indexField]->data;
-                if ($data->Key != 'PRI') {
-                    $__srcService .= "        if (isset(\$" . $indexTable . "->" . $field . ")) {" . PHP_EOL;
-                    $__srcService .= "            \$" . $indexTable . "ToCreate->set" . ucwords($field) . "(\$" . $indexTable . "->" . $field . ");" . PHP_EOL;
-                    $__srcService .= "        }" . PHP_EOL;
-                }
-            }
-            $__srcService .= PHP_EOL;
-            */
-            $__srcService .= "        return \$" . $indexTable . "ToCreate->setRawAttributes((array) \$" . $indexTable . ");" . PHP_EOL;
+            $__srcService .= "        return new " . ucwords($indexTable) . "(\$input);" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= "}" . PHP_EOL;
 
@@ -554,16 +532,13 @@ class LarabitGeneratorService
             $__srcService .= "        if (\$perPage < 1) {" . PHP_EOL;
             $__srcService .= "            \$perPage = self::DEFAULT_PER_PAGE_PAGINATION;" . PHP_EOL;
             $__srcService .= "        }" . PHP_EOL;
-            $__srcService .= PHP_EOL;
-            $__srcService .= "        return \$this->" . $indexTable . "Repository->get" . ucwords($indexTable) . "sByPage(" . PHP_EOL;
-            $__srcService .= "            \$page," . PHP_EOL;
-            $__srcService .= "            \$perPage" . PHP_EOL;
-            $__srcService .= "        );" . PHP_EOL;
+            $__srcService .= "        \$criteria = array('page' => \$page, 'perPage' => \$perPage);" . PHP_EOL;
+            $__srcService .= "        return \$this->" . $indexTable . "Repository->fetchRowsByCriteria(\$criteria);" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= PHP_EOL;
             $__srcService .= "    public function getAll()" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
-            $__srcService .= "        return \$this->" . $indexTable . "Repository->getAll();" . PHP_EOL;
+            $__srcService .= "        return \$this->" . $indexTable . "Repository->fetchRowsByCriteria();" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= PHP_EOL;
             $__srcService .= "    public function get" . ucwords($indexTable) . "(\$" . $indexTable . "Id)" . PHP_EOL;
@@ -589,6 +564,9 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "final class Update extends Base" . PHP_EOL;
             $__srcService .= "{" . PHP_EOL;
+            $__srcService .= "    use FieldValidator;" . PHP_EOL;
+            $__srcService .= PHP_EOL;
+            $__srcService .= "    private \$fieldsRequired = array('" . implode("', '", $fieldsToValidate) . "'');" . PHP_EOL;
             $__srcService .= "    public function update(\$input, \$" . $indexTable . "Id)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
             $__srcService .= "        \$data = \$this->validate" . ucwords($indexTable) . "Data(\$input, \$" . $indexTable . "Id);" . PHP_EOL;
@@ -597,38 +575,17 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "    private function validate" . ucwords($indexTable) . "Data(\$input, \$" . $indexTable . "Id)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
-            $__srcService .= "        \$" . $indexTable . "ToUpdate = \$this->get" . ucwords($indexTable) . "FromDb(\$" . $indexTable . "Id);" . PHP_EOL;
-            $__srcService .= "        \$data = json_decode((string)json_encode(\$input), false);" . PHP_EOL;
-            $__srcService .= "        \$hasException = false;" . PHP_EOL;
-            $__srcService .= "        \$fieldsException = array();" . PHP_EOL;
+            $__srcService .= "        \$fieldsException = \$this->validator(\$input);" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            foreach ($table as $indexField => $field) {
-                $field = $table[$indexField]->key;
-                $data = $table[$indexField]->data;
-                if ($data->Null == 'NO' && $data->Key != 'PRI') {
-                    $__srcService .= "        if (!isset(\$data->" . $field . ")) {" . PHP_EOL;
-                    $__srcService .= "            \$hasException = true;" . PHP_EOL;
-                    $__srcService .= "            \$fieldsException[] = '" . $field . "';" . PHP_EOL;
-                    $__srcService .= "        }" . PHP_EOL;
-                }
-            }
-            $__srcService .= PHP_EOL;
-            $__srcService .= "        if (\$hasException == true) {" . PHP_EOL;
-            $__srcService .= "            throw new " . ucwords($indexTable) . "Exception('El/los campos ' . implode(',', \$fieldsException) . ' son requerido(s).', 400);" . PHP_EOL;
+            $__srcService .= "        if (count(\$fieldsException)) {" . PHP_EOL;
+            $__srcService .= "          throw new " . ucwords($indexTable) . "Exception('El/los campos ' . GenericUtils::arrayValuesToString(\$fieldsException, \", \") . ' son requerido(s).', 400);" . PHP_EOL;
             $__srcService .= "        }" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            /*foreach ($table as $indexField => $field) {
-                $field = $table[$indexField]->key;
-                $data = $table[$indexField]->data;
-                if ($data->Key != 'PRI') {
-                    $__srcService .= "        if (isset(\$data->" . $field . ")) {" . PHP_EOL;
-                    $__srcService .= "            \$" . $indexTable . "ToUpdate->set" . ucwords($field) . "(\$data->" . $field . ");" . PHP_EOL;
-                    $__srcService .= "        }" . PHP_EOL;
-                }
-            }
-            $__srcService .= PHP_EOL;
-            */
-            $__srcService .= "        return \$" . $indexTable . "ToUpdate->setRawAttributes((array) \$data);" . PHP_EOL;
+            $__srcService .= "        \$" . $indexTable . "ToUpdate = \$this->get" . ucwords($indexTable) . "FromDb(\$" . ucwords($indexTable) . "Id);" . PHP_EOL;
+            $__srcService .= "        if (!isset(\$" . $indexTable . "ToUpdate)) {" . PHP_EOL;
+            $__srcService .= "          throw new " . ucwords($indexTable) . "Exception('No se encontro el registro con el identificador ' . \$" . $indexTable . "Id, 400);" . PHP_EOL;
+            $__srcService .= "        }" . PHP_EOL;
+            $__srcService .= "        return new " . ucwords($indexTable) . "(\$input);" . PHP_EOL;
             $__srcService .= "    }" . PHP_EOL;
             $__srcService .= "}" . PHP_EOL;
 
