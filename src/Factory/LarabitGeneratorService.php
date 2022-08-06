@@ -2,6 +2,8 @@
 
 namespace App\Factory;
 
+use Psr\Container\ContainerInterface;
+
 class LarabitGeneratorService
 {
     private $dbConn;
@@ -108,12 +110,13 @@ class LarabitGeneratorService
         foreach ($this->allTables as $index => $table) {
             $__configRepositories .= "use App\Repository\\" . ucfirst($index) . "Repository;" . PHP_EOL;
         }
+        $__configRepositories .= "use Psr\Container\ContainerInterface;" . PHP_EOL;
 
         $__configRepositories .= PHP_EOL;
 
         foreach ($this->allTables as $index => $table) {
-            $__configRepositories .= "\$container['" . $index . "_repository'] = static function () {" . PHP_EOL;
-            $__configRepositories .= "    return new " . ucfirst($index) . "Repository();" . PHP_EOL;
+            $__configRepositories .= "\$container['" . $index . "_repository'] = static function (ContainerInterface \$container) {" . PHP_EOL;
+            $__configRepositories .= "    return new " . ucfirst($index) . "Repository(\$container->get('db'));" . PHP_EOL;
             $__configRepositories .= "};" . PHP_EOL;
         }
 
