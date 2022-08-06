@@ -60,7 +60,7 @@ class LarabitGeneratorService
                 $i++;
             }
             // after completing the loop, put the results into the table list array
-            $tableList[$table->{$db}] = $fieldList;
+            $tableList[$table[$db]] = $fieldList;
         }
         $this->allTables = $tableList;
     }
