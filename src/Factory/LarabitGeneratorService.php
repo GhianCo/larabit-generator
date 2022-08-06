@@ -41,10 +41,10 @@ class LarabitGeneratorService
     {
         $query = $this->dbConn->query('SHOW TABLES');
         $tables_in_db = $query->fetchAll();
-        $db = "Tables_in_".$this->database;
+        $db = "Tables_in_" . $this->database;
         $tableList = array();
 
-        foreach($tables_in_db as $table){
+        foreach ($tables_in_db as $table) {
             $query = $this->dbConn->query('describe ' . $table[$db]);
             $dataTable = $query->fetchAll();
             $fieldList = array();
@@ -460,6 +460,8 @@ class LarabitGeneratorService
                 }
             }
 
+            $fieldsToValidate = count($fieldsToValidate) ? "'" . implode("', '", $fieldsToValidate) . "'" : '';
+
             $__srcService = PHP_EOL;
             $__srcService .= PHP_EOL;
             $__srcService .= "namespace App\Service\\" . ucwords($indexTable) . ";" . PHP_EOL;
@@ -472,8 +474,8 @@ class LarabitGeneratorService
             $__srcService .= "final class Create extends Base" . PHP_EOL;
             $__srcService .= "{" . PHP_EOL;
             $__srcService .= "    use FieldValidator;" . PHP_EOL;
+            $__srcService .= "    private \$fieldsRequired = array(" . $fieldsToValidate . ");" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            $__srcService .= "    private \$fieldsRequired = array('" . count($fieldsToValidate) ? implode("', '", $fieldsToValidate) : '' . "');" . PHP_EOL;
             $__srcService .= "    public function create(\$input)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
             $__srcService .= "        \$data = \$this->validate" . ucwords($indexTable) . "Data(\$input);" . PHP_EOL;
@@ -563,6 +565,7 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "namespace App\Service\\" . ucwords($indexTable) . ";" . PHP_EOL;
             $__srcService .= PHP_EOL;
+            $__srcService .= "use App\Utils\FieldValidator;" . PHP_EOL;
             $__srcService .= "use App\Entity\\" . ucwords($indexTable) . ";" . PHP_EOL;
             $__srcService .= "use \App\Exception\\" . ucwords($indexTable) . " as " . ucwords($indexTable) . "Exception;" . PHP_EOL;
             $__srcService .= "use App\Utils;" . PHP_EOL;
@@ -571,7 +574,7 @@ class LarabitGeneratorService
             $__srcService .= "{" . PHP_EOL;
             $__srcService .= "    use FieldValidator;" . PHP_EOL;
             $__srcService .= PHP_EOL;
-            $__srcService .= "    private \$fieldsRequired = array('" . count($fieldsToValidate) ? implode("', '", $fieldsToValidate) : '' . "');" . PHP_EOL;
+            $__srcService .= "    private \$fieldsRequired = array(" . $fieldsToValidate . ");" . PHP_EOL;
             $__srcService .= "    public function update(\$input, \$" . $indexTable . "Id)" . PHP_EOL;
             $__srcService .= "    {" . PHP_EOL;
             $__srcService .= "        \$data = \$this->validate" . ucwords($indexTable) . "Data(\$input, \$" . $indexTable . "Id);" . PHP_EOL;
