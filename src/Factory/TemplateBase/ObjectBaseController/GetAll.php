@@ -9,9 +9,9 @@ final class GetAll extends Base
         $page = $request->getQueryParam('page', null);
         $perPage = $request->getQueryParam('perPage', null);
      
-        $Objectbase = $this->getServiceFindObjectbase()->getObjectbasesByPage((int)$page, (int)$perPage);
+        $objectbase = $this->getServiceFindObjectbase()->getObjectbasesByPage((int)$page, (int)$perPage);
      
-        return $this->jsonResponse($response, 'success', $Objectbase['data'], 200, $Objectbase['pagination']);
+        return $this->jsonResponse($response, 'success', $objectbase['data'], 200, $objectbase['pagination']);
     }
 }
 ?>
