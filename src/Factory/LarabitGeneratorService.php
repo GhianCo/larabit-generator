@@ -567,7 +567,7 @@ class LarabitGeneratorService
             $__srcService .= PHP_EOL;
             $__srcService .= "use App\Utils\FieldValidator;" . PHP_EOL;
             $__srcService .= "use App\Entity\\" . ucwords($indexTable) . ";" . PHP_EOL;
-            $__srcService .= "use \App\Exception\\" . ucwords($indexTable) . " as " . ucwords($indexTable) . "Exception;" . PHP_EOL;
+            $__srcService .= "use App\Exception\\" . ucwords($indexTable) . "Exception;" . PHP_EOL;
             $__srcService .= "use App\Utils;" . PHP_EOL;
             $__srcService .= PHP_EOL;
             $__srcService .= "final class Update extends Base" . PHP_EOL;
