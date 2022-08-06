@@ -39,20 +39,21 @@ class LarabitGeneratorService
 
     function validateHasDatabase()
     {
-        $tables_in_db = $this->dbConn::select('SHOW TABLES');
+        $query = $this->dbConn->query('SHOW TABLES');
+        $tables_in_db = $query->fetchAll();
         $db = "Tables_in_".$this->database;
         $tableList = array();
+
         foreach($tables_in_db as $table){
-            $dataTable = $this->dbConn::select('describe ' . $table->{$db});
-            // the field list array
+            $query = $this->dbConn->query('describe ' . $table[$db]);
+            $dataTable = $query->fetchAll();
             $fieldList = array();
 
-            // array pointer
             $i = 0;
-            // loop through the generated field list
+
             foreach ($dataTable as $fVal) {
                 $data = new \stdClass();
-                $data->key = $fVal->Field;
+                $data->key = $fVal['Field'];
                 $data->data = $fVal;
                 // put it into the array
                 $fieldList[$i] = $data;
@@ -455,7 +456,7 @@ class LarabitGeneratorService
             foreach ($table as $indexField => $field) {
                 $field = $table[$indexField]->key;
                 $data = $table[$indexField]->data;
-                if ($data->Null == 'NO' && $data->Key != 'PRI') {
+                if ($data['Null'] == 'NO' && $data['Key'] != 'PRI') {
                     $fieldsToValidate[] .= $field;
                 }
             }
